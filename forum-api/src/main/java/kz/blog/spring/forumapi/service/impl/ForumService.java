@@ -47,7 +47,7 @@ public class ForumService implements IForumService {
     public Forum updateForumOwnerByUsername(Long forumId, String username) {
         Forum forum = forumRepository.getForumById(forumId);
 
-        User user = restTemplate.getForObject("http://localhost:8081/user/", User.class);
+        User user = restTemplate.getForObject("http://localhost:8080/user/getByUsername/" + username, User.class);
 
         if (user != null && user.getId() != null) {
             forum.setOwnerId(user.getId());
@@ -60,7 +60,7 @@ public class ForumService implements IForumService {
     public Forum addMember(Long forumId, String username) {
         Forum forum = forumRepository.getForumById(forumId);
 
-        User user = restTemplate.getForObject("http://localhost:8081/user/", User.class);
+        User user = restTemplate.getForObject("http://localhost:8080/user/getByUsername/" + username, User.class);
 
         if (user != null && user.getId() != null) {
             boolean has = false;

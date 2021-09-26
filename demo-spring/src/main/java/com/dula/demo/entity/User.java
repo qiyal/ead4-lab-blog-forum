@@ -21,9 +21,5 @@ public class User {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Forum> forums = new ArrayList<>();
-
 }
 

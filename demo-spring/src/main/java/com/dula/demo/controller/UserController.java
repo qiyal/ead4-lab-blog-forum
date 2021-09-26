@@ -28,7 +28,12 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-        return ResponseEntity.ok().body(this.userService.getUser(userId));
+        return ResponseEntity.ok().body(this.userService.getUserById(userId));
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+        return ResponseEntity.ok().body(this.userService.getUserByUsername(username));
     }
 
     @GetMapping("/role")

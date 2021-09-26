@@ -45,8 +45,12 @@ public class UserService implements UserDetailsService {
         user.getRoles().add(role);
     }
 
-    public User getUser(Long userId) {
+    public User getUserById(Long userId) {
         return this.userRepo.getById(userId);
+    }
+
+    public User getUserByUsername(String username) {
+        return this.userRepo.findByUsername(username);
     }
 
     public List<User> getUsers() {

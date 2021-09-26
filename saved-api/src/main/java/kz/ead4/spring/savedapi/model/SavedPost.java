@@ -1,24 +1,20 @@
-package kz.ead4.spring.savedapi.controller;
+package kz.ead4.spring.savedapi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Saved {
+public class SavedPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String ownerId;
-
-    @OneToMany
-    @JoinColumn(name = "saved_id")
-    private List<SavedPost> postsIds;
+    @Column(name = "saved_id")
+    private Long savedId;
+    private Long postId;
 }

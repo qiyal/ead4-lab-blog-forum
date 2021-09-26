@@ -1,9 +1,10 @@
 package com.dula.demo.controller;
 
+import com.dula.demo.model.Forum;
 import com.dula.demo.entity.Role;
 import com.dula.demo.entity.User;
+import com.dula.demo.model.Post;
 import com.dula.demo.service.UserService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,9 +20,15 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/")
+//    GET
+    @GetMapping("")
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok().body(this.userService.getUsers());
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+        return ResponseEntity.ok().body(this.userService.getUser(userId));
     }
 
     @GetMapping("/role")
@@ -28,6 +36,17 @@ public class UserController {
         return ResponseEntity.ok().body(this.userService.getRoles());
     }
 
+    @GetMapping("/forums/{userId}")
+    public ResponseEntity<List<Forum>> getUserForums(@PathVariable Long userId) {
+        return ResponseEntity.ok().body(this.userService.getUserForums(userId));
+    }
+
+    @GetMapping("/posts/{userId}")
+    public ResponseEntity<List<Post>> getUserPosts(@PathVariable Long userId) {
+        return ResponseEntity.ok().body(this.userService.getUserPosts(userId));
+    }
+
+//    POST
     @PostMapping("")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         URI uri = URI.create(
@@ -49,14 +68,9 @@ public class UserController {
     }
 
     @PostMapping("/add-role")
-    public ResponseEntity<Role> addRoleToUser(@RequestBody RoleToUserForm form) {
-        this.userService.addRoleToUser(form.getUsername(), form.getRoleName());
+    public ResponseEntity<Role> addRoleToUser(@RequestBody Map<String, String> reqBody) {
+        this.userService.addRoleToUser(reqBody.get("username"), reqBody.get("password"));
         return ResponseEntity.ok().build();
     }
 }
 
-@Data
-class RoleToUserForm {
-    private String username;
-    private String roleName;
-}

@@ -1,5 +1,6 @@
 package com.dula.demo.entity;
 
+import com.dula.demo.model.Forum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +19,11 @@ public class User {
     private String name;
     private String surname;
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER )
+    @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Forum> forums = new ArrayList<>();
+
 }
 

@@ -17,4 +17,9 @@ public class ForumMember {
     @Column(name = "forum_id")
     private Long forumId;
     private Long memberId;
+
+    public ForumMember(Long forumId, Long memberId) {
+        this.forumId = forumId;
+        this.memberId = memberId;
+    }
 }

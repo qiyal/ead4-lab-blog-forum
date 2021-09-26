@@ -10,5 +10,5 @@ import java.util.List;
 public interface ForumRepository extends JpaRepository<Forum, Long> {
     Forum getForumById(Long forumId);
 //    List<Forum> getAllBy();
-    List<Forum> getForumsByTitleLike(String title);
+    List<Forum> findForumsByTitle(String title);
 }

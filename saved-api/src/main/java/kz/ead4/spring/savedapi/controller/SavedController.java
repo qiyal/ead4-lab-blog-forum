@@ -23,7 +23,17 @@ public class SavedController {
     }
 
     @PatchMapping("/rename-title")
-    private ResponseEntity<?> updateSavedTitle(@RequestParam("id") Long id, @RequestParam String title) {
+    private ResponseEntity<?> updateSavedTitle(@RequestParam("id") Long id, @RequestParam("title") String title) {
         return ResponseEntity.ok(savedService.updateSavedTitle(id, title));
+    }
+
+    @PatchMapping("/delete/{id}")
+    private void updateSavedTitle(@PathVariable("id") Long id) {
+        savedService.deletePost(id);
+    }
+
+    @PatchMapping("/add-post")
+    private ResponseEntity<?> searchPostByTitleInSaved(@RequestParam("id") Long id, @RequestParam("title") String title) {
+        return ResponseEntity.ok(savedService.searchPostByTitleInSaved(id, title));
     }
 }

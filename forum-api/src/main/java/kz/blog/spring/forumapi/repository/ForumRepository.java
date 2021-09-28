@@ -11,4 +11,5 @@ public interface ForumRepository extends JpaRepository<Forum, Long> {
     Forum getForumById(Long forumId);
 //    List<Forum> getAllBy();
     List<Forum> findForumsByTitle(String title);
+    List<Forum> getForumsByTitleIsLike(String title);
 }

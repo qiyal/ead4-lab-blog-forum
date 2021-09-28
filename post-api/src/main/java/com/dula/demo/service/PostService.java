@@ -23,4 +23,8 @@ public class PostService {
     public void createPost(Post post) {
         this.postRepo.save(post);
     }
+
+    public List<Post> getPostByIds(List<Long> postIds) {
+        return postRepo.getPostsByIdIn(postIds);
+    }
 }

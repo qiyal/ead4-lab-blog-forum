@@ -24,6 +24,11 @@ public class PostController {
         return ResponseEntity.ok().body(this.postService.getPostById(postId));
     }
 
+    @PostMapping("/getPostIds")
+    public ResponseEntity<List<Post>> getPostByIds(@RequestBody List<Long> postIds) {
+        return ResponseEntity.ok().body(this.postService.getPostByIds(postIds));
+    }
+
     @PostMapping("")
     public void createPost(@RequestBody Post post) {
         this.postService.createPost(post);

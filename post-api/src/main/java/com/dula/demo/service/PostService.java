@@ -1,6 +1,7 @@
 package com.dula.demo.service;
 
 import com.dula.demo.entity.Post;
+import com.dula.demo.model.PostList;
 import com.dula.demo.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class PostService {
         this.postRepo.save(post);
     }
 
-    public List<Post> getPostByIds(List<Long> postIds) {
-        return postRepo.getPostsByIdIn(postIds);
+    public PostList getPostByIds(List<Long> postIds) {
+        return new PostList(postRepo.getPostsByIdIn(postIds));
     }
 }

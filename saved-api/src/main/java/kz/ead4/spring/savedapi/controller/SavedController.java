@@ -32,7 +32,7 @@ public class SavedController {
         savedService.deletePost(id);
     }
 
-    @PatchMapping("/add-post")
+    @GetMapping("/search")
     private ResponseEntity<?> searchPostByTitleInSaved(@RequestParam("id") Long id, @RequestParam("title") String title) {
         return ResponseEntity.ok(savedService.searchPostByTitleInSaved(id, title));
     }

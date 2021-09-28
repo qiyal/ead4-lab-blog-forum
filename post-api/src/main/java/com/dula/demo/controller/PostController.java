@@ -1,6 +1,7 @@
 package com.dula.demo.controller;
 
 import com.dula.demo.entity.Post;
+import com.dula.demo.model.PostList;
 import com.dula.demo.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class PostController {
     }
 
     @PostMapping("/getPostIds")
-    public ResponseEntity<List<Post>> getPostByIds(@RequestBody List<Long> postIds) {
+    public ResponseEntity<PostList> getPostByIds(@RequestBody List<Long> postIds) {
         return ResponseEntity.ok().body(this.postService.getPostByIds(postIds));
     }
 

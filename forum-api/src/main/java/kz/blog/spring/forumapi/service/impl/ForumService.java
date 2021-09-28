@@ -30,7 +30,7 @@ public class ForumService implements IForumService {
 
     @Override
     public List<Forum> searchForumByTitle(String title) {
-        return forumRepository.findForumsByTitle(title);
+        return forumRepository.getForumsByTitleIsLike("%" + title + "%");
     }
 
     @Override

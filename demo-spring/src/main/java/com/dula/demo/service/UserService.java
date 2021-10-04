@@ -67,7 +67,7 @@ public class UserService implements UserDetailsService {
 
     public List<Forum> getUserForums(Long userId) {
         ResponseEntity<Forum[]> response = this.restTemplate.getForEntity(
-                  "http://localhost:8081/forum/user/" + userId,
+                  "http://forum-api-app/forum/user/" + userId,
                   Forum[].class
         );
         Forum[] forums = response.getBody();
@@ -77,7 +77,7 @@ public class UserService implements UserDetailsService {
 
     public List<Post> getUserPosts(Long userId) {
         ResponseEntity<Post[]> response = this.restTemplate.getForEntity(
-                  "http://localhost:8081/post/user/" + userId,
+                  "http://post-api-app/post/user/" + userId,
                   Post[].class
         );
         Post[] posts = response.getBody();

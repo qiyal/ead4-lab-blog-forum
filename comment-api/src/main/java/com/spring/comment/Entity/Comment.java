@@ -1,4 +1,4 @@
-package com.spring.comment.Entity;
+package com.spring.comment.entity;
 
 import lombok.Data;
 

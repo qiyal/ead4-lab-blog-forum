@@ -1,5 +1,5 @@
-package com.spring.comment.Repository;
-import com.spring.comment.Entity.Comment;
+package com.spring.comment.repository;
+import com.spring.comment.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

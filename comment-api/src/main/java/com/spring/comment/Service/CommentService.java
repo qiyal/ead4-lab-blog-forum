@@ -1,8 +1,8 @@
-package com.spring.comment.Service;
+package com.spring.comment.service;
 
-import com.spring.comment.Entity.Comment;
-import com.spring.comment.Model.CommentList;
-import com.spring.comment.Repository.CommentRepository;
+import com.spring.comment.entity.Comment;
+import com.spring.comment.model.CommentList;
+import com.spring.comment.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.spring.comment.Model;
+package com.spring.comment.model;
 
-import com.spring.comment.Entity.Comment;
+import com.spring.comment.entity.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

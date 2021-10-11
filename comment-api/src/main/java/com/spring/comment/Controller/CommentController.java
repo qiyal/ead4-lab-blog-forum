@@ -1,8 +1,8 @@
-package com.spring.comment.Controller;
+package com.spring.comment.controller;
 
-import com.spring.comment.Entity.Comment;
-import com.spring.comment.Model.CommentList;
-import com.spring.comment.Service.CommentService;
+import com.spring.comment.entity.Comment;
+import com.spring.comment.model.CommentList;
+import com.spring.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

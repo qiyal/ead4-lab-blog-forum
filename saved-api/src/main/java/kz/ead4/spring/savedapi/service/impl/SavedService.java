@@ -50,7 +50,7 @@ public class SavedService implements ISavedService {
         for (SavedPost savedPost : saved.getPostsIds())
             postIds.add(savedPost.getPostId());
 
-        PostList postList = restTemplate.postForObject("http://localhost:8083/post/getPostIds", postIds, PostList.class);
+        PostList postList = restTemplate.postForObject("http://post-api-app/post/getPostIds", postIds, PostList.class);
 
         List<Post> result = new ArrayList<>();
 

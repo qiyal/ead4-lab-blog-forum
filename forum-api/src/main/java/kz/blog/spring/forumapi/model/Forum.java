@@ -1,5 +1,6 @@
 package kz.blog.spring.forumapi.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class Forum {
     private String title;
     private Long ownerId;
 
+    @ApiModelProperty(notes = "List of members in forum")
     @OneToMany
     @JoinColumn(name = "forum_id")
     private List<ForumMember> membersIds;

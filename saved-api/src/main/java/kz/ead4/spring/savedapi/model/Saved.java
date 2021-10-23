@@ -1,5 +1,6 @@
 package kz.ead4.spring.savedapi.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class Saved {
     private String title;
     private String ownerId;
 
+    @ApiModelProperty(notes = "List of posts in saved")
     @OneToMany
     @JoinColumn(name = "saved_id")
     private List<SavedPost> postsIds;

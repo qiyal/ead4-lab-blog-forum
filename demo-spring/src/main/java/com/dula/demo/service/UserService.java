@@ -6,6 +6,8 @@ import com.dula.demo.entity.Role;
 import com.dula.demo.entity.User;
 import com.dula.demo.repository.RoleRepository;
 import com.dula.demo.repository.UserRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

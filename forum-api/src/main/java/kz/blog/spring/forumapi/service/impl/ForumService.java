@@ -7,7 +7,7 @@ import kz.blog.spring.forumapi.repository.ForumRepository;
 import kz.blog.spring.forumapi.service.IForumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+//import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -15,8 +15,10 @@ import java.util.List;
 public class ForumService implements IForumService {
     @Autowired
     private ForumRepository forumRepository;
+//    @Autowired
+//    private RestTemplate restTemplate;
     @Autowired
-    private RestTemplate restTemplate;
+    private UserService userService;
 
     @Override
     public Forum getForumById(Long forumId) {
@@ -47,7 +49,7 @@ public class ForumService implements IForumService {
     public Forum updateForumOwnerByUsername(Long forumId, String username) {
         Forum forum = forumRepository.getForumById(forumId);
 
-        User user = restTemplate.getForObject("http://user-api-app/user/getByUsername/" + username, User.class);
+        User user = userService.getByUsername(username);
 
         if (user != null && user.getId() != null) {
             forum.setOwnerId(user.getId());
@@ -60,7 +62,7 @@ public class ForumService implements IForumService {
     public Forum addMember(Long forumId, String username) {
         Forum forum = forumRepository.getForumById(forumId);
 
-        User user = restTemplate.getForObject("http://user-api-app/user/getByUsername/" + username, User.class);
+        User user = userService.getByUsername(username);
 
         if (user != null && user.getId() != null) {
             boolean has = false;

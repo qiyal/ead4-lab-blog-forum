@@ -8,7 +8,7 @@ import kz.ead4.spring.savedapi.repository.SavedRepository;
 import kz.ead4.spring.savedapi.service.ISavedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+//import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,10 @@ import java.util.List;
 public class SavedService implements ISavedService {
     @Autowired
     private SavedRepository savedRepository;
+//    @Autowired
+//    private RestTemplate restTemplate;
     @Autowired
-    private RestTemplate restTemplate;
+    private PostService postService;
 
     @Override
     public Saved createSaved(Saved saved) {
@@ -50,7 +52,7 @@ public class SavedService implements ISavedService {
         for (SavedPost savedPost : saved.getPostsIds())
             postIds.add(savedPost.getPostId());
 
-        PostList postList = restTemplate.postForObject("http://post-api-app/post/getPostIds", postIds, PostList.class);
+        PostList postList = postService.getPostIds(postIds);
 
         List<Post> result = new ArrayList<>();
 

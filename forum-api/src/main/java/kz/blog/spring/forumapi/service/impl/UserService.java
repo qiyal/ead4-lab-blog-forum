@@ -18,7 +18,7 @@ public class UserService implements IUserService {
     @Override
     @HystrixCommand(
             fallbackMethod = "getByUsernameFallback",
-            threadPoolKey = "getBookInformationById",
+            threadPoolKey = "getByUsername",
             threadPoolProperties = {
                     @HystrixProperty(name="coreSize", value="100"),
                     @HystrixProperty(name="maxQueueSize", value="50"),

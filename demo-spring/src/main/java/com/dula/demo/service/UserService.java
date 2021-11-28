@@ -91,7 +91,7 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = this.userRepo.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found in the database!");
+            throw new UsernameNotFoundException("User by username=" + username + " not found!");
         }
 
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();

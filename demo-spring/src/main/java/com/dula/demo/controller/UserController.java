@@ -52,7 +52,7 @@ public class UserController {
     }
 
 //    POST
-    @PostMapping("")
+    @PostMapping("/create")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         URI uri = URI.create(
                   ServletUriComponentsBuilder.fromCurrentContextPath()

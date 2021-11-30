@@ -15,13 +15,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+//                .cors().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .exceptionHandling().authenticationEntryPoint((req, resp, e) -> resp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
                 .authorizeRequests()
 //                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/user-api/auth/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/user-api/auth/**", "/user-api/user/create/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/post-api/post/all").permitAll()
                 .anyRequest().authenticated()
                 .and()

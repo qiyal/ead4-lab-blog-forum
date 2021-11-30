@@ -1,8 +1,10 @@
 package kz.blog.spring.forumapi.service.impl;
 
+import kz.blog.spring.forumapi.model.AddUserForumRequest;
 import kz.blog.spring.forumapi.model.Forum;
 import kz.blog.spring.forumapi.model.ForumMember;
 import kz.blog.spring.forumapi.model.User;
+import kz.blog.spring.forumapi.producer.ForumProducer;
 import kz.blog.spring.forumapi.repository.ForumRepository;
 import kz.blog.spring.forumapi.service.IForumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import java.util.List;
 public class ForumService implements IForumService {
     @Autowired
     private ForumRepository forumRepository;
+    @Autowired
+    private ForumProducer forumProducer;
 //    @Autowired
 //    private RestTemplate restTemplate;
     @Autowired
@@ -78,6 +82,9 @@ public class ForumService implements IForumService {
                 forum.getMembersIds().add(new ForumMember(forum.getId(), user.getId()));
                 return forumRepository.saveAndFlush(forum);
             }
+
+            AddUserForumRequest addUserForumRequest = new AddUserForumRequest(user.getId().toString(), forum);
+            forumProducer.forumRequestNotify(addUserForumRequest);
         }
         return null;
     }

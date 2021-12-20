@@ -47,4 +47,8 @@ public class PostService {
         return Arrays.asList(comments != null ? comments : new Comment[0]);
     }
 
+    public List<Post> getAll() {
+        return postRepo.findAll();
+    }
+
 }

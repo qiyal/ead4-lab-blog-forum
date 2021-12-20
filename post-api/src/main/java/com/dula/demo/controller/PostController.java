@@ -12,8 +12,15 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/post")
+@CrossOrigin(origins = "*")
 public class PostController {
     private final PostService postService;
+
+//    @CrossOrigin(origins = "*")
+    @GetMapping("/all")
+    public ResponseEntity<List<Post>> getAll() {
+        return ResponseEntity.ok().body(this.postService.getAll());
+    }
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Post>> getPostsByUserId(@PathVariable Long userId) {

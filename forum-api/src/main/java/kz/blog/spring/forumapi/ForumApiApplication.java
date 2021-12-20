@@ -1,5 +1,8 @@
 package kz.blog.spring.forumapi;
 
+import kz.blog.spring.forumapi.model.AddUserForumRequest;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -12,6 +15,9 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.client.RestTemplate;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootApplication
 @EnableEurekaClient

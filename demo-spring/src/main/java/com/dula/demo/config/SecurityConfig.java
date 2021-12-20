@@ -1,6 +1,7 @@
 package com.dula.demo.config;
 
 import com.dula.demo.filter.CustomAuthenticationFilter;
+import com.dula.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserService userService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -46,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //                .anyRequest().authenticated()
                 .and()
-                .addFilter(new CustomAuthenticationFilter(authenticationManager()));
+                .addFilter(new CustomAuthenticationFilter(authenticationManager(), userService));
 //        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
     }
 

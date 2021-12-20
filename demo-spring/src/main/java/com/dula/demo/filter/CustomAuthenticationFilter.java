@@ -1,6 +1,7 @@
 package com.dula.demo.filter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.dula.demo.entity.User;
+import com.dula.demo.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,7 +9,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -23,9 +23,11 @@ import java.util.stream.Collectors;
 
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
+    private final UserService userService;
 
-    public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public CustomAuthenticationFilter(AuthenticationManager authenticationManager, UserService userService) {
         this.authenticationManager = authenticationManager;
+        this.userService = userService;
         this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/auth/**", "POST"));
     }
 
@@ -49,6 +51,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         Long now = System.currentTimeMillis();
+
+        User user = userService.getUserByUsername(authResult.getName());
+
         String token = Jwts.builder()
                 .setSubject(authResult.getName())
                 // Convert to list of strings.
@@ -62,5 +67,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
         // Add token to header
         response.addHeader("Authorization", "Bearer " + token);
+        response.addHeader("AuthorizationUserId", user.getId().toString());
     }
 }

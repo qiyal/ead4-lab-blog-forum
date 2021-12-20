@@ -17,7 +17,7 @@ public class Saved {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String ownerId;
+    private Long ownerId;
 
     @ApiModelProperty(notes = "List of posts in saved")
     @OneToMany

@@ -4,8 +4,10 @@ import kz.ead4.spring.savedapi.model.Post;
 import kz.ead4.spring.savedapi.model.PostList;
 import kz.ead4.spring.savedapi.model.Saved;
 import kz.ead4.spring.savedapi.model.SavedPost;
+import kz.ead4.spring.savedapi.repository.SavedPostRepository;
 import kz.ead4.spring.savedapi.repository.SavedRepository;
 import kz.ead4.spring.savedapi.service.ISavedService;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 //import org.springframework.web.client.RestTemplate;
@@ -17,6 +19,8 @@ import java.util.List;
 public class SavedService implements ISavedService {
     @Autowired
     private SavedRepository savedRepository;
+    @Autowired
+    private SavedPostRepository savedPostRepository;
 //    @Autowired
 //    private RestTemplate restTemplate;
     @Autowired
@@ -65,5 +69,15 @@ public class SavedService implements ISavedService {
         }
 
         return result;
+    }
+
+    @Override
+    public List<Saved> getByOwnerId(Long ownerId) {
+        return savedRepository.getSavedsByOwnerId(ownerId);
+    }
+
+    @Override
+    public SavedPost addPost(SavedPost savedPost) {
+        return savedPostRepository.saveAndFlush(savedPost);
     }
 }

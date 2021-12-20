@@ -20,8 +20,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint((req, resp, e) -> resp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
                 .authorizeRequests()
-//                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/user-api/auth/**").permitAll()
+
+                // API AUTH
+                .antMatchers(HttpMethod.POST, "/api/user-api/auth/**").permitAll()
+
+                // API USER
+                .antMatchers("/api/user-api/user/public/**").permitAll()
+                .antMatchers("/api/user-api/user/private/**").hasAnyAuthority("ADMIN", "USER")
+
+                // API FORUM API
+                .antMatchers("/api/forum-api/forum/public/**").permitAll()
+                .antMatchers("/api/forum-api/forum/private/**").hasAnyAuthority("ADMIN", "USER")
+
                 .anyRequest().authenticated()
                 .and()
                 .addFilterAfter(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

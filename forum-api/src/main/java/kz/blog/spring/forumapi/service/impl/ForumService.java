@@ -51,7 +51,7 @@ public class ForumService implements IForumService {
 
         User user = userService.getByUsername(username);
 
-        if (user != null && user.getId() != null) {
+        if (user != null && user.getId() != null && user.getId() != 0L) {
             forum.setOwnerId(user.getId());
             return forumRepository.saveAndFlush(forum);
         }

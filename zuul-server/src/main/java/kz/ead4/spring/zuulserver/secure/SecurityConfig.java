@@ -28,9 +28,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/user-api/user/public/**").permitAll()
                 .antMatchers("/api/user-api/user/private/**").hasAnyAuthority("ADMIN", "USER")
 
-                // API FORUM API
+                // API FORUM
                 .antMatchers("/api/forum-api/forum/public/**").permitAll()
                 .antMatchers("/api/forum-api/forum/private/**").hasAnyAuthority("ADMIN", "USER")
+
+                // API POST
+                .antMatchers("/api/post-api/post/public/**").permitAll()
+                .antMatchers("/api/post-api/post/private/**").hasAnyAuthority("ADMIN", "USER")
 
                 .anyRequest().authenticated()
                 .and()

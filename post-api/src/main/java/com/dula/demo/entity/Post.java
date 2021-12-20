@@ -13,4 +13,5 @@ public class Post {
     private String title;
     private String text;
     private Long userId;
+    private String username;
 }

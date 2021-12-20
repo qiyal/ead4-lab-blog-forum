@@ -3,6 +3,7 @@ package com.dula.demo.service;
 import com.dula.demo.entity.Post;
 import com.dula.demo.model.Comment;
 import com.dula.demo.model.PostList;
+import com.dula.demo.model.User;
 import com.dula.demo.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepo;
+    private final UserService userService;
 
     @Autowired
     private final RestTemplate restTemplate;
@@ -30,7 +32,12 @@ public class PostService {
     }
 
     public void createPost(Post post) {
-        this.postRepo.save(post);
+        User user = userService.getByUsername(post.getUsername());
+
+        if (user != null && user.getId() != 0L) {
+            post.setUserId(user.getId());
+            this.postRepo.save(post);
+        }
     }
 
     public PostList getPostByIds(List<Long> postIds) {
@@ -47,4 +54,15 @@ public class PostService {
         return Arrays.asList(comments != null ? comments : new Comment[0]);
     }
 
+    public List<Post> getAll() {
+        return postRepo.findAll();
+    }
+
+    public List<Post> searchLikeByTitle(String title) {
+        return postRepo.getPostsByTitleLike(title + "%");
+    }
+
+    public List<Post> getPostsByUsername(String username) {
+        return postRepo.getPostsByUsername(username);
+    }
 }

@@ -17,42 +17,46 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
+//@CrossOrigin(origins = "*")
 public class UserController {
     private final UserService userService;
 
+    private final static String publicApi = "/public";
+    private final static String privateApi = "/private";
+
 //    GET
-    @GetMapping("")
+    @GetMapping(publicApi + "")
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok().body(this.userService.getUsers());
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping(publicApi + "/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable Long userId) {
         return ResponseEntity.ok().body(this.userService.getUserById(userId));
     }
 
-    @GetMapping("/getByUsername/{username}")
+    @GetMapping(publicApi + "/getByUsername/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
         return ResponseEntity.ok().body(this.userService.getUserByUsername(username));
     }
 
-    @GetMapping("/role")
+    @GetMapping(publicApi + "/role")
     public ResponseEntity<List<Role>> getRoles() {
         return ResponseEntity.ok().body(this.userService.getRoles());
     }
 
-    @GetMapping("/forums/{userId}")
+    @GetMapping(publicApi + "/forums/{userId}")
     public ResponseEntity<List<Forum>> getUserForums(@PathVariable Long userId) {
         return ResponseEntity.ok().body(this.userService.getUserForums(userId));
     }
 
-    @GetMapping("/posts/{userId}")
+    @GetMapping(publicApi + "/posts/{userId}")
     public ResponseEntity<List<Post>> getUserPosts(@PathVariable Long userId) {
         return ResponseEntity.ok().body(this.userService.getUserPosts(userId));
     }
 
 //    POST
-    @PostMapping("/create")
+    @PostMapping(publicApi + "/create")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         URI uri = URI.create(
                   ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -62,7 +66,7 @@ public class UserController {
         return ResponseEntity.created(uri).body(this.userService.saveUser(user));
     }
 
-    @PostMapping("/role")
+    @PostMapping(privateApi + "/role")
     public ResponseEntity<Role> saveRole(@RequestBody Role role) {
         URI uri = URI.create(
                   ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -72,9 +76,9 @@ public class UserController {
         return ResponseEntity.created(uri).body(this.userService.saveRole(role));
     }
 
-    @PostMapping("/add-role")
+    @PostMapping(privateApi + "/add-role")
     public ResponseEntity<Role> addRoleToUser(@RequestBody Map<String, String> reqBody) {
-        this.userService.addRoleToUser(reqBody.get("username"), reqBody.get("password"));
+        this.userService.addRoleToUser(reqBody.get("username"), reqBody.get("role"));
         return ResponseEntity.ok().build();
     }
 }

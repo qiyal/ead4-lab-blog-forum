@@ -24,7 +24,7 @@ public class UserService implements IUserService {
                     @HystrixProperty(name="maxQueueSize", value="50"),
             })
     public User getByUsername(String username) {
-        return restTemplate.getForObject("http://user-api-app/user/getByUsername/" + username, User.class);
+        return restTemplate.getForObject("http://user-api-app/user/public/getByUsername/" + username, User.class);
     }
 
     public User getByUsernameFallback(String username) {

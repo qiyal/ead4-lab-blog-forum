@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SavedService implements ISavedService {
@@ -79,5 +80,16 @@ public class SavedService implements ISavedService {
     @Override
     public SavedPost addPost(SavedPost savedPost) {
         return savedPostRepository.saveAndFlush(savedPost);
+    }
+
+    @Override
+    public PostList getPosts(Long savedId) {
+        Saved saved = savedRepository.getSavedById(savedId);
+
+        List<Long> savedIds = saved.getPostsIds().stream().map(SavedPost::getPostId).collect(Collectors.toList());
+
+        PostList posts = postService.getPostIds(savedIds);
+
+        return posts;
     }
 }

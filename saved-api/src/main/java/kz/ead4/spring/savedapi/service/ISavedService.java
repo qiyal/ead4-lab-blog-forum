@@ -1,6 +1,7 @@
 package kz.ead4.spring.savedapi.service;
 
 import kz.ead4.spring.savedapi.model.Post;
+import kz.ead4.spring.savedapi.model.PostList;
 import kz.ead4.spring.savedapi.model.Saved;
 import kz.ead4.spring.savedapi.model.SavedPost;
 
@@ -14,4 +15,5 @@ public interface ISavedService {
     List<Post> searchPostByTitleInSaved(Long id, String title);
     List<Saved> getByOwnerId(Long ownerId);
     SavedPost addPost(SavedPost savedPost);
+    PostList getPosts(Long savedId);
 }

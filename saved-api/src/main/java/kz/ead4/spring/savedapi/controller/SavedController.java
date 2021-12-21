@@ -57,4 +57,10 @@ public class SavedController {
     private ResponseEntity<?> addPost(@RequestBody SavedPost savedPost) {
         return ResponseEntity.ok(savedService.addPost(savedPost));
     }
+
+    @ApiOperation(value = "Get Posts")
+    @GetMapping(publicApi + "/getPosts/{id}")
+    private ResponseEntity<?> getPosts(@PathVariable("id") Long savedId) {
+        return ResponseEntity.ok(savedService.getPosts(savedId));
+    }
 }
